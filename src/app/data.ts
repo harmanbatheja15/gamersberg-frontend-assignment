@@ -3,7 +3,7 @@ export const data = [
 		id: 1,
 		name: 'Rocket',
 		value: '5000',
-		price: '5k',
+		price: '5000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},
@@ -11,7 +11,7 @@ export const data = [
 		id: 2,
 		name: 'Spin',
 		value: '7000',
-		price: '7k',
+		price: '7000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},
@@ -19,7 +19,7 @@ export const data = [
 		id: 3,
 		name: 'Blade',
 		value: '30000',
-		price: '30k',
+		price: '30000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},
@@ -27,7 +27,7 @@ export const data = [
 		id: 4,
 		name: 'Spring',
 		value: '60000',
-		price: '60k',
+		price: '60000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},
@@ -35,7 +35,7 @@ export const data = [
 		id: 5,
 		name: 'Bomb',
 		value: '80000',
-		price: '80k',
+		price: '80000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},
@@ -43,7 +43,7 @@ export const data = [
 		id: 6,
 		name: 'Smoke',
 		value: '100000',
-		price: '100k',
+		price: '100000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},
@@ -51,7 +51,7 @@ export const data = [
 		id: 7,
 		name: 'Spike',
 		value: '180000',
-		price: '180k',
+		price: '180000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},
@@ -59,7 +59,7 @@ export const data = [
 		id: 8,
 		name: 'Flame',
 		value: '250000',
-		price: '250k',
+		price: '250000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},
@@ -67,7 +67,7 @@ export const data = [
 		id: 9,
 		name: 'Falcon',
 		value: '300000',
-		price: '300k',
+		price: '300000',
 		image:
 			'https://www.gamersberg.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSpinFruit.de54d693.webp&w=256&q=75',
 	},

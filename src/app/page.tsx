@@ -15,6 +15,10 @@ export default function Home() {
 	const [offerItems, setOfferItems] = useState<itemTypes[]>([]);
 	const [requestItems, setRequestItems] = useState<itemTypes[]>([]);
 
+	const calculateTotal = (items: itemTypes[]) => {
+		return items.reduce((sum, item) => sum + parseInt(item.value), 0);
+	};
+
 	const addOfferItem = (item: itemTypes) => {
 		setOfferItems([...offerItems, item]);
 		setTimeout(() => setShowOfferPopup(false), 0);
@@ -93,9 +97,14 @@ export default function Home() {
 					<div className='flex flex-col md:flex-row items-start justify-center md:mx-20 mx-4 gap-4'>
 						{/* Offer Section */}
 						<div className='w-full lg:w-1/3 relative rounded-lg'>
-							<h2 className='text-left font-semibold text-2xl py-2 ml-4'>
-								Offer (You)
-							</h2>
+							<div className='flex justify-between items-center pr-4'>
+								<h2 className='text-left font-semibold text-2xl py-2 ml-4'>
+									Offer (You)
+								</h2>
+								<div className='text-[#15F5BA] font-semibold'>
+									Total: {calculateTotal(offerItems).toLocaleString()}
+								</div>
+							</div>
 							<div className='relative flex flex-wrap p-4 gap-4 justify-between'>
 								<div
 									className='w-[45%] h-[200px] relative flex items-center justify-center border border-[#15F5BA] rounded-lg cursor-pointer'
@@ -139,9 +148,14 @@ export default function Home() {
 
 						{/* Request Section */}
 						<div className='w-full lg:w-1/3 relative rounded-lg'>
-							<h2 className='text-left font-semibold text-2xl py-2 ml-4'>
-								Request (Them)
-							</h2>
+							<div className='flex justify-between items-center pr-4'>
+								<h2 className='text-left font-semibold text-2xl py-2 ml-4'>
+									Request (Them)
+								</h2>
+								<div className='text-[#15F5BA] font-semibold'>
+									Total: {calculateTotal(requestItems).toLocaleString()}
+								</div>
+							</div>
 							<div className='relative flex flex-wrap p-4 gap-4 justify-between'>
 								<div
 									className='w-[45%] h-[200px] relative flex items-center justify-center border border-[#15F5BA] rounded-lg cursor-pointer'
@@ -178,6 +192,22 @@ export default function Home() {
 								))}
 							</div>
 						</div>
+					</div>
+					<div className='flex items-center justify-around text-lg'>
+						<div className=''>
+							<b>Total Value: {calculateTotal(offerItems).toLocaleString()}</b>
+						</div>
+						<div className=''>
+							<b>
+								Total Value: {calculateTotal(requestItems).toLocaleString()}
+							</b>
+						</div>
+					</div>
+					<div className='text-center mt-2 text-lg'>
+						<b>Difference: </b>{' '}
+						{calculateTotal(offerItems) > calculateTotal(requestItems)
+							? calculateTotal(offerItems) - calculateTotal(requestItems)
+							: calculateTotal(requestItems) - calculateTotal(offerItems)}
 					</div>
 				</main>
 			</div>
