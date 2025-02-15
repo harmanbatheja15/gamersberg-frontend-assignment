@@ -17,10 +17,12 @@ export default function Home() {
 
 	const addOfferItem = (item: itemTypes) => {
 		setOfferItems([...offerItems, item]);
+		setTimeout(() => setShowOfferPopup(false), 0);
 	};
 
 	const addRequestItem = (item: itemTypes) => {
 		setRequestItems([...requestItems, item]);
+		setTimeout(() => setShowRequestPopup(false), 0);
 	};
 
 	const deleteOfferItem = (index: number) => {
@@ -30,6 +32,54 @@ export default function Home() {
 	const deleteRequestItem = (index: number) => {
 		setRequestItems(requestItems.filter((_, i: number) => i !== index));
 	};
+
+	const OfferPopupDesktop = () => (
+		<div className='hidden md:block'>
+			<div>
+				<SelectOfferItemPopup
+					setShowOfferPopup={setShowOfferPopup}
+					addOfferItem={addOfferItem}
+				/>
+			</div>
+		</div>
+	);
+
+	const OfferPopupMobile = () => (
+		<div className='md:hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
+			<ClickAwayListener onClickAway={() => setShowOfferPopup(false)}>
+				<div className='w-full mx-4'>
+					<SelectOfferItemPopup
+						setShowOfferPopup={setShowOfferPopup}
+						addOfferItem={addOfferItem}
+					/>
+				</div>
+			</ClickAwayListener>
+		</div>
+	);
+
+	const RequestPopupDesktop = () => (
+		<div className='hidden md:block'>
+			<div>
+				<SelectRequestItemPopup
+					setShowRequestPopup={setShowRequestPopup}
+					addRequestItem={addRequestItem}
+				/>
+			</div>
+		</div>
+	);
+
+	const RequestPopupMobile = () => (
+		<div className='md:hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
+			<ClickAwayListener onClickAway={() => setShowRequestPopup(false)}>
+				<div className='w-full mx-4'>
+					<SelectRequestItemPopup
+						setShowRequestPopup={setShowRequestPopup}
+						addRequestItem={addRequestItem}
+					/>
+				</div>
+			</ClickAwayListener>
+		</div>
+	);
 
 	return (
 		<>
@@ -52,33 +102,9 @@ export default function Home() {
 									onClick={() => setShowOfferPopup(true)}
 								>
 									<PlusCircle size={36} color='#15F5BA' />
-									<ClickAwayListener
-										onClickAway={() => setShowOfferPopup(false)}
-										className='hidden md:block'
-									>
-										<div className='hidden md:block'>
-											{showOfferPopup && (
-												<SelectOfferItemPopup
-													setShowOfferPopup={setShowOfferPopup}
-													addOfferItem={addOfferItem}
-												/>
-											)}
-										</div>
-									</ClickAwayListener>
+									{showOfferPopup && <OfferPopupDesktop />}
 								</div>
-								<ClickAwayListener
-									onClickAway={() => setShowOfferPopup(false)}
-									className='md:hidden'
-								>
-									<div className='md:hidden'>
-										{showOfferPopup && (
-											<SelectOfferItemPopup
-												setShowOfferPopup={setShowOfferPopup}
-												addOfferItem={addOfferItem}
-											/>
-										)}
-									</div>
-								</ClickAwayListener>
+								{showOfferPopup && <OfferPopupMobile />}
 								{!offerItems.length && (
 									<div className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'></div>
 								)}
@@ -122,33 +148,9 @@ export default function Home() {
 									onClick={() => setShowRequestPopup(true)}
 								>
 									<PlusCircle size={36} color='#15F5BA' />
-									<ClickAwayListener
-										onClickAway={() => setShowRequestPopup(false)}
-										className='hidden md:block'
-									>
-										<div className='hidden md:block'>
-											{showRequestPopup && (
-												<SelectRequestItemPopup
-													setShowRequestPopup={setShowRequestPopup}
-													addRequestItem={addRequestItem}
-												/>
-											)}
-										</div>
-									</ClickAwayListener>
+									{showRequestPopup && <RequestPopupDesktop />}
 								</div>
-								<ClickAwayListener
-									onClickAway={() => setShowRequestPopup(false)}
-									className='md:hidden'
-								>
-									<div className='md:hidden'>
-										{showRequestPopup && (
-											<SelectRequestItemPopup
-												setShowRequestPopup={setShowRequestPopup}
-												addRequestItem={addRequestItem}
-											/>
-										)}
-									</div>
-								</ClickAwayListener>
+								{showRequestPopup && <RequestPopupMobile />}
 								{!requestItems.length && (
 									<div className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'></div>
 								)}
