@@ -2,17 +2,18 @@ import React from 'react';
 import { data } from '@/app/data';
 import Image from 'next/image';
 import { Plus } from 'lucide-react';
+import { itemTypes } from '@/types';
 
 interface SelectRequestItemPopupProps {
 	setShowRequestPopup: (value: boolean) => void;
-	addRequestItem: (item: any) => void;
+	addRequestItem: (item: itemTypes) => void;
 }
 
 const SelectRequestItemPopup = ({
 	setShowRequestPopup,
 	addRequestItem,
 }: SelectRequestItemPopupProps) => {
-	const handleClick = (item: any) => {
+	const handleClick = (item: itemTypes) => {
 		addRequestItem(item);
 		setShowRequestPopup(false);
 	};

@@ -7,27 +7,28 @@ import SelectOfferItemPopup from '@/components/SelectOfferItemPopup';
 import SelectRequestItemPopup from '@/components/SelectRequestItemPopup';
 import ClickAwayListener from 'react-click-away-listener';
 import Image from 'next/image';
+import { itemTypes } from '@/types';
 
 export default function Home() {
 	const [showOfferPopup, setShowOfferPopup] = useState(false);
 	const [showRequestPopup, setShowRequestPopup] = useState(false);
-	const [offerItems, setOfferItems] = useState<any>([]);
-	const [requestItems, setRequestItems] = useState<any>([]);
+	const [offerItems, setOfferItems] = useState<itemTypes[]>([]);
+	const [requestItems, setRequestItems] = useState<itemTypes[]>([]);
 
-	const addOfferItem = (item: any) => {
+	const addOfferItem = (item: itemTypes) => {
 		setOfferItems([...offerItems, item]);
 	};
 
-	const addRequestItem = (item: any) => {
+	const addRequestItem = (item: itemTypes) => {
 		setRequestItems([...requestItems, item]);
 	};
 
 	const deleteOfferItem = (index: number) => {
-		setOfferItems(offerItems.filter((_: any, i: any) => i !== index));
+		setOfferItems(offerItems.filter((_, i: number) => i !== index));
 	};
 
 	const deleteRequestItem = (index: number) => {
-		setRequestItems(requestItems.filter((_: any, i: any) => i !== index));
+		setRequestItems(requestItems.filter((_, i: number) => i !== index));
 	};
 
 	return (
@@ -81,7 +82,7 @@ export default function Home() {
 								{!offerItems.length && (
 									<div className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'></div>
 								)}
-								{offerItems.map((item: any, index: number) => (
+								{offerItems.map((item: itemTypes, index: number) => (
 									<div
 										key={index}
 										className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'
@@ -151,7 +152,7 @@ export default function Home() {
 								{!requestItems.length && (
 									<div className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'></div>
 								)}
-								{requestItems.map((item: any, index: number) => (
+								{requestItems.map((item: itemTypes, index: number) => (
 									<div
 										key={index}
 										className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'

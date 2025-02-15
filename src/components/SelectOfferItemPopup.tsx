@@ -2,17 +2,18 @@ import React from 'react';
 import { data } from '@/app/data';
 import Image from 'next/image';
 import { Plus } from 'lucide-react';
+import { itemTypes } from '@/types';
 
 interface SelectOfferItemPopupProps {
 	setShowOfferPopup: (value: boolean) => void;
-	addOfferItem: (item: any) => void;
+	addOfferItem: (item: itemTypes) => void;
 }
 
 const SelectOfferItemPopup = ({
 	setShowOfferPopup,
 	addOfferItem,
 }: SelectOfferItemPopupProps) => {
-	const handleClick = (item: any) => {
+	const handleClick = (item: itemTypes) => {
 		addOfferItem(item);
 		setShowOfferPopup(false);
 	};
