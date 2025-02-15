@@ -1,101 +1,183 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import Navbar from '@/components/Navbar';
+import { ArrowRightLeft, PlusCircle, XCircle } from 'lucide-react';
+import SelectOfferItemPopup from '@/components/SelectOfferItemPopup';
+import SelectRequestItemPopup from '@/components/SelectRequestItemPopup';
+import ClickAwayListener from 'react-click-away-listener';
+import Image from 'next/image';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+	const [showOfferPopup, setShowOfferPopup] = useState(false);
+	const [showRequestPopup, setShowRequestPopup] = useState(false);
+	const [offerItems, setOfferItems] = useState<any>([]);
+	const [requestItems, setRequestItems] = useState<any>([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	const addOfferItem = (item: any) => {
+		setOfferItems([...offerItems, item]);
+	};
+
+	const addRequestItem = (item: any) => {
+		setRequestItems([...requestItems, item]);
+	};
+
+	const deleteOfferItem = (index: number) => {
+		setOfferItems(offerItems.filter((_: any, i: any) => i !== index));
+	};
+
+	const deleteRequestItem = (index: number) => {
+		setRequestItems(requestItems.filter((_: any, i: any) => i !== index));
+	};
+
+	return (
+		<>
+			<div className='min-h-screen font-[family-name:var(--font-geist-sans)]'>
+				<Navbar />
+
+				<main className='py-10'>
+					<h1 className='text-3xl text-white text-center font-bold mb-4'>
+						Calculator
+					</h1>
+					<div className='flex flex-col md:flex-row items-start justify-center md:mx-20 mx-4 gap-4'>
+						{/* Offer Section */}
+						<div className='w-full lg:w-1/3 relative rounded-lg'>
+							<h2 className='text-left font-semibold text-2xl py-2 ml-4'>
+								Offer (You)
+							</h2>
+							<div className='relative flex flex-wrap p-4 gap-4 justify-between'>
+								<div
+									className='w-[45%] h-[200px] relative flex items-center justify-center border border-[#15F5BA] rounded-lg cursor-pointer'
+									onClick={() => setShowOfferPopup(true)}
+								>
+									<PlusCircle size={36} color='#15F5BA' />
+									<ClickAwayListener
+										onClickAway={() => setShowOfferPopup(false)}
+										className='hidden md:block'
+									>
+										<div className='hidden md:block'>
+											{showOfferPopup && (
+												<SelectOfferItemPopup
+													setShowOfferPopup={setShowOfferPopup}
+													addOfferItem={addOfferItem}
+												/>
+											)}
+										</div>
+									</ClickAwayListener>
+								</div>
+								<ClickAwayListener
+									onClickAway={() => setShowOfferPopup(false)}
+									className='md:hidden'
+								>
+									<div className='md:hidden'>
+										{showOfferPopup && (
+											<SelectOfferItemPopup
+												setShowOfferPopup={setShowOfferPopup}
+												addOfferItem={addOfferItem}
+											/>
+										)}
+									</div>
+								</ClickAwayListener>
+								{!offerItems.length && (
+									<div className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'></div>
+								)}
+								{offerItems.map((item: any, index: number) => (
+									<div
+										key={index}
+										className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'
+									>
+										<Image
+											src={item?.image}
+											alt=''
+											width={60}
+											height={60}
+											className='mb-4'
+										/>
+										<h2>{item?.price}</h2>
+										<h2>{item?.name}</h2>
+										<XCircle
+											size={24}
+											color='gray'
+											className='absolute top-2 right-2 cursor-pointer'
+											onClick={() => deleteOfferItem(index)}
+										/>
+									</div>
+								))}
+							</div>
+						</div>
+
+						<div className='mx-auto md:mx-0 my-auto'>
+							<ArrowRightLeft className='rotate-90 md:rotate-0' />
+						</div>
+
+						{/* Request Section */}
+						<div className='w-full lg:w-1/3 relative rounded-lg'>
+							<h2 className='text-left font-semibold text-2xl py-2 ml-4'>
+								Request (Them)
+							</h2>
+							<div className='relative flex flex-wrap p-4 gap-4 justify-between'>
+								<div
+									className='w-[45%] h-[200px] relative flex items-center justify-center border border-[#15F5BA] rounded-lg cursor-pointer'
+									onClick={() => setShowRequestPopup(true)}
+								>
+									<PlusCircle size={36} color='#15F5BA' />
+									<ClickAwayListener
+										onClickAway={() => setShowRequestPopup(false)}
+										className='hidden md:block'
+									>
+										<div className='hidden md:block'>
+											{showRequestPopup && (
+												<SelectRequestItemPopup
+													setShowRequestPopup={setShowRequestPopup}
+													addRequestItem={addRequestItem}
+												/>
+											)}
+										</div>
+									</ClickAwayListener>
+								</div>
+								<ClickAwayListener
+									onClickAway={() => setShowRequestPopup(false)}
+									className='md:hidden'
+								>
+									<div className='md:hidden'>
+										{showRequestPopup && (
+											<SelectRequestItemPopup
+												setShowRequestPopup={setShowRequestPopup}
+												addRequestItem={addRequestItem}
+											/>
+										)}
+									</div>
+								</ClickAwayListener>
+								{!requestItems.length && (
+									<div className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'></div>
+								)}
+								{requestItems.map((item: any, index: number) => (
+									<div
+										key={index}
+										className='w-[45%] h-[200px] relative flex flex-col items-center justify-center border border-gray-700 rounded-lg'
+									>
+										<Image
+											src={item?.image}
+											alt=''
+											width={60}
+											height={60}
+											className='mb-4'
+										/>
+										<h2>{item?.price}</h2>
+										<h2>{item?.name}</h2>
+										<XCircle
+											size={24}
+											color='gray'
+											className='absolute top-2 right-2 cursor-pointer'
+											onClick={() => deleteRequestItem(index)}
+										/>
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+				</main>
+			</div>
+		</>
+	);
 }
