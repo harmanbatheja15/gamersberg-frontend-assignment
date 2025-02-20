@@ -1,0 +1,36 @@
+<svg
+								width='536'
+								height='236'
+								viewBox='0 0 536 236'
+								fill='none'
+								xmlns='http://www.w3.org/2000/svg'
+								className='absolute -bottom-20 -left-20 -z-10'
+							>
+								<g filter='url(#filter0_f_1_143)'>
+									<path d='M92 92H444V144H92V92Z' fill='#2461AA' />
+									<path d='M92.5 92.5H443.5V143.5H92.5V92.5Z' stroke='white' />
+								</g>
+								<defs>
+									<filter
+										id='filter0_f_1_143'
+										x='0.900002'
+										y='0.900002'
+										width='534.2'
+										height='234.2'
+										filterUnits='userSpaceOnUse'
+										color-interpolation-filters='sRGB'
+									>
+										<feFlood flood-opacity='0' result='BackgroundImageFix' />
+										<feBlend
+											mode='normal'
+											in='SourceGraphic'
+											in2='BackgroundImageFix'
+											result='shape'
+										/>
+										<feGaussianBlur
+											stdDeviation='45.55'
+											result='effect1_foregroundBlur_1_143'
+										/>
+									</filter>
+								</defs>
+							</svg>
